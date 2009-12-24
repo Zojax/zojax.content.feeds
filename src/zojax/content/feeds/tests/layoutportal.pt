@@ -1,0 +1,6 @@
+<html>
+  <body>
+    <tal:block tal:content="structure view/render" />
+    <div tal:content="structure portlet:portlet.actions" />
+  </body>
+</html>

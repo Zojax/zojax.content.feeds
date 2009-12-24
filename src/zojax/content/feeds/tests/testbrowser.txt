@@ -1,0 +1,148 @@
+=============
+Browser tests
+=============
+
+    >>> from zope import interface, component, event
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zope.lifecycleevent import ObjectModifiedEvent
+
+    >>> root = getRootFolder()
+    >>> sm = root.getSiteManager()
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+
+    >>> actor.open('http://localhost/space/')
+
+We don't have any feeds
+
+    >>> 'View feeds' in actor.contents
+    False
+
+Let's create simple rss2.0 feed. In general case we just need
+implement 'items' method.
+
+    >>> from zojax.content.feeds.rss2 import RSS2Feed
+
+    >>> class MyFeed(RSS2Feed):
+    ...     component.adapts(interface.Interface)
+    ...
+    ...     name = u'myfeed'
+    ...     title = u'My feed'
+    ...     description = u''
+    ...
+    ...     _items = ()
+    ...
+    ...     def items(self):
+    ...         return self._items
+
+Now register feed
+
+    >>> component.provideAdapter(MyFeed, name='myfeed')
+    >>> event.notify(ObjectModifiedEvent(root['space']))
+
+Let's check what ww have now
+
+    >>> actor.reload()
+    >>> print actor.contents
+    <html>
+    ...
+    <div><div class="z-portlet portlet-actions">
+      <h2 class="z-portlet-header">Actions</h2>
+      <div class="z-portlet-body">
+        <div class="z-portlet-item">
+          <h5 class="z-portlet-item-title">Notifications</h5>
+          <ul class="z-listing">
+            <li class="even">
+              <a href="http://localhost/space/@@feeds/">
+              <img src="..." alt="ViewFeedsAction" width="16" height="16" border="0" />
+              Subscribe to Feeds</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>...
+    ...
+    </html>
+
+    >>> actor.getLink('Subscribe to Feeds').click()
+    >>> print actor.contents
+    <html>
+    ...
+    <h1 class="z-content-title">RSS Feeds</h1>
+    <div class="z-page-description">
+        Use the links below to subscribe to RSS feeds.
+    </div>
+    <ul class="z-listing">
+      <li>
+        <div class="z-listing-details">
+          <a href="http://localhost/space/@@feeds/myfeed">My feed</a>
+        </div>
+      </li>
+    </ul>
+    ...
+    </html>
+
+RSS feed
+
+    >>> actor.open('http://localhost/space/@@feeds/myfeed')
+    >>> print actor.contents
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+      <channel>
+        <title>My feed</title>
+        <link>http://localhost/space/</link>
+        <description></description>
+        <atom:link rel="self" type="application/rss+xml"
+                   href="http://localhost/space/@@feeds/myfeed"/>
+      </channel>
+    </rss>
+
+Simple items
+
+    >>> items = [
+    ...     {'title': u'Star City',
+    ...      'link': 'http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp',
+    ...      'description': u'How do Americans get ready to work with Russians aboard the International Space Station? They take a crash course in culture, language and protocol at Russia\'s <a href=\"http://howe.iki.rssi.ru/GCTC/gctc_e.htm>Star City</a>.',
+    ...      'date': 'Tue, 03 Jun 2003 09:39:21 GMT',
+    ...      'guid': 'http://liftoff.msfc.nasa.gov/2003/06/03.html',
+    ...      'isPermaLink': True},
+    ...     {'title': u'',
+    ...      'description': "Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a <a href=\"http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm\">partial eclipse of the Sun</a> on Saturday, May 31st.",
+    ...      'pubDate': 'Fri, 30 May 2003 11:06:42 GMT',
+    ...      'guid': 'http://liftoff.msfc.nasa.gov/2003/05/30.html',
+    ...      }]
+    >>> MyFeed._items = items
+
+    >>> actor.reload()
+    >>> print actor.contents
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+      <channel>
+        <title>My feed</title>
+        <link>http://localhost/space/</link>
+        <description></description>
+        <atom:link rel="self" type="application/rss+xml"
+                   href="http://localhost/space/@@feeds/myfeed"/>
+        <item>
+          <title>Star City</title>
+          <description>How do Americans get ready to work with Russians aboard the International Space Station? They take a crash course in culture, language and protocol at Russia's &lt;a href="http://howe.iki.rssi.ru/GCTC/gctc_e.htm&gt;Star City&lt;/a&gt;.</description>
+          <guid isPermaLink="true">http://liftoff.msfc.nasa.gov/2003/06/03.html</guid>
+          <link>http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp</link>
+        </item>
+        <item>
+          <title></title>
+          <description>Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a &lt;a href="http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm"&gt;partial eclipse of the Sun&lt;/a&gt; on Saturday, May 31st.</description>
+          <guid isPermaLink="false">http://liftoff.msfc.nasa.gov/2003/05/30.html</guid>
+          <pubDate>Fri, 30 May 2003 11:06:42 GMT</pubDate>
+        </item>
+      </channel>
+    </rss>
+
+
+just test
+
+    >>> actor.open('http://localhost/space/@@feeds/unknown')
+    Traceback (most recent call last):
+    ...
+    NotFound: ...

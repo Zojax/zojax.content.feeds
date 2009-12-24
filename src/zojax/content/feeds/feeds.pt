@@ -1,0 +1,47 @@
+<div id="space-columns" i18n:domain="zojax.content.feeds">
+  <table id="space-columns-table">
+    <tr>
+      <td id="space-column-content">
+        <div id="z-portal-workspace" class="z-content-feeds">
+	  
+          <h1 class="z-content-title" i18n:translate="">RSS Feeds</h1>
+
+          <div class="z-page-description" i18n:translate="">
+	    Use the links below to subscribe to RSS feeds. 
+          </div>
+
+          <ul class="z-listing" tal:define="feeds context/listFeeds" tal:condition="feeds">
+            <li tal:repeat="feed feeds" tal:define="url context/@@absolute_url">
+              <div class="z-listing-icon" 
+		   tal:define="icon feed/@@zmi_icon|nothing" tal:condition="icon">
+                <img tal:replace="structure icon" />
+              </div>
+              <div class="z-listing-details">
+                <a tal:define="furl string:$url/${feed/name}"
+                   tal:content="feed/title" tal:attributes="href furl"></a>
+                <div tal:content="feed/description" tal:condition="feed/description"></div>
+              </div>
+            </li>
+          </ul>
+	  
+          <div class="visualClear"></div>
+	  
+        </div>
+      </td>
+
+      <td id="space-column-two">
+        <div class="space-column-wrapper">
+          <div class="z-portlet portlet-feedshelp">
+            <h2 class="z-portlet-header">About RSS Feeds</h2>
+            <div class="z-portlet-body">
+              <div class="z-portlet-item">
+                <p><a href="http://en.wikipedia.org/wiki/RSS">RSS</a> (Really Simple Syndication) is a way for you to keep track of changes or additions to content you care about. By subscribing to the RSS feed for content, you're asking to have easy access to information about content changes or additions.</p> <p>To view RSS feeds you use an RSS reader (also known as an "<a href="http://en.wikipedia.org/wiki/Aggregator">aggregator</a>"). This could be your web browser (recent versions of Internet Explorer, Firefox, and Safari support this). There are also reader applications that are specifically designed to collect and aggregate RSS feeds.</p> <p>To subscribe to the RSS feed you want, click its link.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+
+    </tr>
+  </table>
+</div>
