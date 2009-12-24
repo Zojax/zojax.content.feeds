@@ -1,0 +1,47 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.content.feeds">
+
+  <!-- @@feeds -->
+  <adapter
+     name="feeds"
+     provides="zope.interface.Interface"
+     factory=".feeds.Feeds" />
+
+  <class class=".feeds.Feeds">
+    <require
+       permission="zope.View"
+       attributes="title listFeeds"
+       interface="zope.publisher.interfaces.browser.IBrowserPublisher" />
+  </class>
+
+  <class class=".feeds.FeedView">
+    <require
+       permission="zope.View"
+       interface="zope.publisher.interfaces.browser.IBrowserPage" />
+  </class>
+
+  <zojax:resource
+     name="rss-icon.png"
+     file="rss.png" />
+
+  <!-- @@feeds view -->
+  <zojax:pagelet
+     name="index.html"
+     layout="space"
+     for=".feeds.Feeds"
+     template="feeds.pt" />
+
+  <!-- view feed action -->
+  <adapter
+     name="action.viewfeeds"
+     factory=".actions.ViewFeedsAction" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="feeds-icon.gif"
+     for=".actions.IViewFeedsAction" />
+
+</configure>

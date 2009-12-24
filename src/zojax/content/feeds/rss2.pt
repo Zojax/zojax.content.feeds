@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><tal:block tal:content="view/title"/><tal:block tal:define="title view/contexttitle" tal:condition="title"> - <tal:block content="title"/></tal:block></title>
+    <link tal:content="view/link"></link>
+    <description tal:content="view/description"></description>
+    <language tal:condition="view/language" tal:content="view/language"></language>
+    <pubDate tal:condition="view/date" tal:content="view/date"></pubDate>
+    <lastBuildDate tal:condition="view/buildDate" tal:content="view/buildDate"></lastBuildDate>
+    <managingEditor tal:condition="view/editor" tal:content="view/editor"></managingEditor>
+    <webMaster tal:condition="view/webmaster" tal:content="view/webmaster"></webMaster>
+    <atom:link tal:attributes="href string:${view/link}@@feeds/${view/name}" rel="self" type="application/rss+xml" />
+    <item tal:repeat="item view/items">
+      <title tal:content="item/title"></title>
+      <description tal:content="item/description"></description>
+      <guid tal:content="item/guid" tal:define="isPermaLink item/isPermaLink|nothing"
+	    tal:attributes="isPermaLink python:isPermaLink and 'true' or 'false'"></guid>
+      <link tal:condition="item/link|nothing" tal:content="item/link"></link>
+      <author tal:condition="item/author|nothing" tal:content="item/author"></author>
+      <category tal:condition="item/category|nothing" tal:content="item/category"></category>
+      <pubDate tal:condition="item/pubDate|nothing" tal:content="item/pubDate"></pubDate>
+    </item>
+  </channel>
+</rss>
