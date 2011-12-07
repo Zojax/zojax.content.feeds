@@ -32,10 +32,20 @@
       <td id="space-column-two">
         <div class="space-column-wrapper">
           <div class="z-portlet portlet-feedshelp">
-            <h2 class="z-portlet-header">About RSS Feeds</h2>
+            <h2 class="z-portlet-header" i18n:translate="">About RSS Feeds</h2>
             <div class="z-portlet-body">
               <div class="z-portlet-item">
-                <p><a href="http://en.wikipedia.org/wiki/RSS">RSS</a> (Really Simple Syndication) is a way for you to keep track of changes or additions to content you care about. By subscribing to the RSS feed for content, you're asking to have easy access to information about content changes or additions.</p> <p>To view RSS feeds you use an RSS reader (also known as an "<a href="http://en.wikipedia.org/wiki/Aggregator">aggregator</a>"). This could be your web browser (recent versions of Internet Explorer, Firefox, and Safari support this). There are also reader applications that are specifically designed to collect and aggregate RSS feeds.</p> <p>To subscribe to the RSS feed you want, click its link.</p>
+		      <p i18n:translate="">
+		      <tal:block i18n:name="rss">
+		      <a href="http://en.wikipedia.org/wiki/RSS" i18n:translate="">RSS</a> 
+		      </tal:block>
+		      (Really Simple Syndication) is a way for you to keep track of changes or additions to content you care about. By subscribing to the RSS feed for content, you're asking to have easy access to information about content changes or additions.</p> 
+		      <p i18n:translate="">To view RSS feeds you use an RSS reader (also known as an "
+		      <tal:block i18n:name="aggregator">
+		      <a href="http://en.wikipedia.org/wiki/Aggregator" i18n:translate="">aggregator</a>
+		      </tal:block>
+		      "). This could be your web browser (recent versions of Internet Explorer, Firefox, and Safari support this). There are also reader applications that are specifically designed to collect and aggregate RSS feeds.</p> 
+		      <p i18n:translate="">To subscribe to the RSS feed you want, click its link.</p>
               </div>
             </div>
           </div>
