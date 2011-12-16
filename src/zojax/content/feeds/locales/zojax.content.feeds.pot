@@ -1,0 +1,62 @@
+##############################################################################
+#
+# Copyright (c) 2003-2004 Zope Corporation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Thu Dec  8 22:36:10 2011\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/content/feeds/actions.py:37
+msgid "Subscribe to Feeds"
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:35
+msgid "About RSS Feeds"
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:39
+msgid "${rss} (Really Simple Syndication) is a way for you to keep track of changes or additions to content you care about. By subscribing to the RSS feed for content, you're asking to have easy access to information about content changes or additions."
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:40
+msgid "RSS"
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:44
+msgid "To view RSS feeds you use an RSS reader (also known as an \" ${aggregator} \"). This could be your web browser (recent versions of Internet Explorer, Firefox, and Safari support this). There are also reader applications that are specifically designed to collect and aggregate RSS feeds."
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:45
+msgid "aggregator"
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:48
+msgid "To subscribe to the RSS feed you want, click its link."
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.pt:9
+msgid "Use the links below to subscribe to RSS feeds."
+msgstr ""
+
+#: src/zojax/content/feeds/feeds.py:33
+#: src/zojax/content/feeds/feeds.pt:7
+msgid "RSS Feeds"
+msgstr ""
+
