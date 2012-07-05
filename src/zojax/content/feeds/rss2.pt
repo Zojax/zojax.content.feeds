@@ -12,7 +12,7 @@
     <atom:link tal:attributes="href string:${view/link}@@feeds/${view/name}" rel="self" type="application/rss+xml" />
     <item tal:repeat="item view/items">
       <title tal:content="item/title"></title>
-      <description tal:content="item/description"></description>
+      <description type="html"><tal:block tal:content="structure python: '&lt;![CDATA[' + item['description'] + ']]&gt;' " /></description>
       <guid tal:content="item/guid" tal:define="isPermaLink item/isPermaLink|nothing"
 	    tal:attributes="isPermaLink python:isPermaLink and 'true' or 'false'"></guid>
       <link tal:condition="item/link|nothing" tal:content="item/link"></link>
