@@ -33,7 +33,7 @@ class RSS2Feed(object):
     editor = None
     webmaster = None
 
-    template = ViewPageTemplateFile('rss2.pt', content_type='text/xml')
+    template = ViewPageTemplateFile('rss2.pt')
 
     def __init__(self, context):
         self.context = context
@@ -48,7 +48,8 @@ class RSS2Feed(object):
 
     def render(self, request):
         self.request = request
-        return self.template()
+        self.request.response.setHeader('Content-Type', 'text/xml')
+        return self.template().encode('utf-8')
 
     def items(self):
         raise NotImplemented('items')
