@@ -1,2 +1,1 @@
 <tal:title content="context/title"/><tal:ctitle define="title context/contexttitle" condition="title"> - <tal:block content="title"/></tal:ctitle>
-
