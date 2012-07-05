@@ -47,4 +47,11 @@
      file="feeds-icon.gif"
      for=".actions.IViewFeedsAction" />
 
+  <browser:page
+     for="*"
+     name="feed_title"
+     template="feedtitle.pt"
+     class=".rss2.feedTitle"
+     permission="zope.Public" />
+
 </configure>

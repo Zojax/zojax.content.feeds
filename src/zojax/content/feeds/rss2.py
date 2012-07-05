@@ -52,3 +52,7 @@ class RSS2Feed(object):
 
     def items(self):
         raise NotImplemented('items')
+
+
+class feedTitle(object):
+    """ view class for feed_title """

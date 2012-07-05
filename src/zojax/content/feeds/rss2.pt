@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title><tal:block tal:content="view/title"/><tal:block tal:define="title view/contexttitle" tal:condition="title"> - <tal:block content="title"/></tal:block></title>
+    <title tal:content="view/@@feed_title"></title>
     <link tal:content="view/link"></link>
     <description tal:content="view/description"></description>
     <language tal:condition="view/language" tal:content="view/language"></language>
