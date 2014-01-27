@@ -47,41 +47,34 @@ Let's check what ww have now
     >>> print actor.contents
     <html>
     ...
-    <div><div class="z-portlet portlet-actions">
+        <div><div class="z-portlet portlet-actions">
       <h2 class="z-portlet-header">Actions</h2>
-      <div class="z-portlet-body">
-        <div class="z-portlet-item">
+    ...
+        </div> <div class="z-portlet-item">
           <h5 class="z-portlet-item-title">Notifications</h5>
-          <ul class="z-listing">
-            <li class="even">
-              <a href="http://localhost/space/@@feeds/">
-              <img src="..." alt="ViewFeedsAction" width="16" height="16" border="0" />
-              Subscribe to Feeds</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>...
+    ...
+    	  <a href="http://localhost/space/@@feeds/">
+    	    <img src="http://localhost/@@/zojax-content-feeds-actions-IViewFeedsAction-zmi_icon.gif" alt="ViewFeedsAction" width="16" height="16" border="0" />
+    	    Subscribe to Feeds</a>
+    	</li>
     ...
     </html>
+
 
     >>> actor.getLink('Subscribe to Feeds').click()
     >>> print actor.contents
     <html>
     ...
-    <h1 class="z-content-title">RSS Feeds</h1>
-    <div class="z-page-description">
-        Use the links below to subscribe to RSS feeds.
-    </div>
-    <ul class="z-listing">
-      <li>
-        <div class="z-listing-details">
-          <a href="http://localhost/space/@@feeds/myfeed">My feed</a>
-        </div>
-      </li>
-    </ul>
+              <h1 class="z-content-title">RSS Feeds</h1>
+              <div class="z-page-description">
+    	    Use the links below to subscribe to RSS feeds.
+              </div>
+    ...
+                    <a href="http://localhost/space/@@feeds/myfeed">My feed</a>
     ...
     </html>
+
+
 
 RSS feed
 
@@ -90,7 +83,8 @@ RSS feed
     <?xml version="1.0" encoding="UTF-8"?>
     <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
       <channel>
-        <title>My feed</title>
+        <title>My feed
+    </title>
         <link>http://localhost/space/</link>
         <description></description>
         <atom:link rel="self" type="application/rss+xml"
@@ -98,8 +92,8 @@ RSS feed
       </channel>
     </rss>
 
-Simple items
 
+Simple items
     >>> items = [
     ...     {'title': u'Star City',
     ...      'link': 'http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp',
@@ -119,25 +113,28 @@ Simple items
     <?xml version="1.0" encoding="UTF-8"?>
     <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
       <channel>
-        <title>My feed</title>
+        <title>My feed
+    </title>
         <link>http://localhost/space/</link>
         <description></description>
         <atom:link rel="self" type="application/rss+xml"
                    href="http://localhost/space/@@feeds/myfeed"/>
         <item>
           <title>Star City</title>
-          <description>How do Americans get ready to work with Russians aboard the International Space Station? They take a crash course in culture, language and protocol at Russia's &lt;a href="http://howe.iki.rssi.ru/GCTC/gctc_e.htm&gt;Star City&lt;/a&gt;.</description>
+          <description type="html"><![CDATA[How do Americans get ready to work with Russians aboard the International Space Station? They take a crash course in culture, language and protocol at Russia's <a href="http://howe.iki.rssi.ru/GCTC/gctc_e.htm>Star City</a>.]]></description>
           <guid isPermaLink="true">http://liftoff.msfc.nasa.gov/2003/06/03.html</guid>
           <link>http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp</link>
         </item>
         <item>
           <title></title>
-          <description>Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a &lt;a href="http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm"&gt;partial eclipse of the Sun&lt;/a&gt; on Saturday, May 31st.</description>
+          <description type="html"><![CDATA[Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a <a href="http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm">partial eclipse of the Sun</a> on Saturday, May 31st.]]></description>
           <guid isPermaLink="false">http://liftoff.msfc.nasa.gov/2003/05/30.html</guid>
           <pubDate>Fri, 30 May 2003 11:06:42 GMT</pubDate>
         </item>
       </channel>
     </rss>
+    <BLANKLINE>
+
 
 
 just test
